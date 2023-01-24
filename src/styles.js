@@ -71,5 +71,6 @@ export const styles = StyleSheet.create({
     width,
     padding: 16,
     height: height * 2,
+    backgroundColor: 'white',
   },
 });

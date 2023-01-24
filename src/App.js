@@ -1,5 +1,13 @@
 import React, {useRef} from 'react';
-import {Text, ScrollView, StatusBar, Animated, View, Image} from 'react-native';
+import {
+  Text,
+  ScrollView,
+  StatusBar,
+  Animated,
+  View,
+  Image,
+  Platform,
+} from 'react-native';
 import {styles, headerHeight, walletHeight, paymentHeight} from './styles';
 
 export const App = () => {
@@ -8,14 +16,13 @@ export const App = () => {
   const translateWallet = scrollY.interpolate({
     inputRange: [0, headerHeight + walletHeight + paymentHeight],
     outputRange: [headerHeight, 0],
-    // extrapolate: 'clamp',
+    extrapolate: 'clamp',
   });
   const translatePayment = scrollY.interpolate({
     inputRange: [0, walletHeight + paymentHeight],
     outputRange: [walletHeight, 0],
     extrapolate: 'clamp',
   });
-
   const Header = () => (
     <Animated.View style={styles.sectionHeader}>
       <Image
@@ -46,15 +53,18 @@ export const App = () => {
     </Animated.View>
   );
   return (
-    <View>
+    <View
+      style={{
+        marginTop: Platform.OS === 'ios' ? 36 : 0,
+      }}>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
-
       <Header />
       <Wallet />
       <Payment />
       <ScrollView
         contentContainerStyle={styles.scrollContentContainer}
         showsVerticalScrollIndicator={false}
+        scrollEventThrottle={16}
         onScroll={Animated.event(
           [{nativeEvent: {contentOffset: {y: scrollY}}}],
           {

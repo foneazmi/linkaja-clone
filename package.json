@@ -1,10 +1,10 @@
 {
-  "name": "linkaja",
+  "name": "link-aja",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "ios": "react-native run-ios --simulator 'iPhone 14'",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint ."
